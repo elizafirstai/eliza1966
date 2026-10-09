@@ -1,0 +1,50 @@
+# node tools/build.mjs && docker compose up --build
+# Then open http://localhost:8080 . On first boot the bridge compiles SLIP and
+# ELIZA inside each CTSS (about a minute per machine). Until a line is ready,
+# the site uses the JavaScript port and says so under the terminal.
+#
+# Each ctss service is one emulated IBM 7094 running one copy of ELIZA, so
+# three services = three people talking to the real thing at once; everyone
+# else gets the port, labelled "all 7094 lines busy". s709 keeps a CPU core
+# busy, so size this to your server. Add or remove ctssN services and the
+# matching ELIZA_LINES entries together.
+
+x-ctss: &ctss
+  build: ./bridge/ctss-image
+  stdin_open: true
+  tty: true
+  restart: unless-stopped
+  # cpus: "0.5"   # optional cap; the 7094 just answers a little slower
+
+services:
+  ctss1:
+    <<: *ctss
+    volumes: [ctss1-dasd:/home/ctss/eliza-ctss/dasd]
+  ctss2:
+    <<: *ctss
+    volumes: [ctss2-dasd:/home/ctss/eliza-ctss/dasd]
+  ctss3:
+    <<: *ctss
+    volumes: [ctss3-dasd:/home/ctss/eliza-ctss/dasd]
+
+  bridge:
+    build: ./bridge
+    depends_on: [ctss1, ctss2, ctss3]
+    restart: unless-stopped
+    environment:
+      ELIZA_LINES: ctss1:7094:eliza:eliza,ctss2:7094:eliza:eliza,ctss3:7094:eliza:eliza
+      ELIZA_SCRIPT: "200"      # 200 = DOCTOR as printed in the 1966 CACM paper; 100 = the script in the 1965 printout
+      ALLOWED_ORIGINS: ""      # e.g. https://eliza1966.xyz  (empty = any origin)
+      SITE_DIR: /site          # also serve the site; remove if you host dist/ elsewhere
+      MSGS_PER_MIN: 20
+      SOCKETS_PER_IP: 2
+      IDLE_MS: 600000
+    volumes:
+      - ./dist:/site:ro
+    ports:
+      - "8080:8080"
+
+volumes:
+  ctss1-dasd:
+  ctss2-dasd:
+  ctss3-dasd:

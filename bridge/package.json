@@ -1,0 +1,12 @@
+{
+  "name": "eliza1966-bridge",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "WebSocket bridge from the browser to the original ELIZA running on CTSS on an emulated IBM 7094",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=20" },
+  "dependencies": { "ws": "^8.18.0" },
+  "license": "CC0-1.0"
+}
