@@ -16,7 +16,7 @@ export const CONFIG = {
   links: {
     source: `${REPO}/blob/main/original/eliza.mad`, // the 1965 MAD-SLIP source in this repo
     github: REPO,
-    x: 'https://x.com/', // placeholder until the account exists
+    x: 'https://x.com/eliza1966org',
   },
 };
 

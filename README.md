@@ -13,6 +13,8 @@
 [![no LLM](https://img.shields.io/badge/LLM-none-E9E3B4?style=flat-square&labelColor=2A2A24)](#is-it-really-her)
 [![Solana](https://img.shields.io/badge/Solana-%24ELIZA1966-F2D23A?style=flat-square&labelColor=2A2A24)](#eliza1966-on-solana)
 
+**[eliza1966.org](https://eliza1966.org)** · **[X @eliza1966org](https://x.com/eliza1966org)**
+
 <img src="docs/demo.gif" width="560" alt="The terminal boots CTSS, prints ELIZA's portrait, and she answers: IN WHAT WAY, YOUR BOYFRIEND MADE YOU COME HERE">
 
 </div>
