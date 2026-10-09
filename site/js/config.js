@@ -25,7 +25,7 @@ export const CONFIG = {
 export const TOKEN = {
   symbol: '$ELIZA1966',
   chain: 'Solana',
-  mint: '5Bx3emSas2W3KtXqSPRtXo4W3vEYC6aHW6EhHdGnpump', // the SPL token mint address (base58), e.g. from pump.fun or Raydium
+  mint: 'Dvz4n2MMgS6SZBqR6MZQTnR3sEE7nYHqsXNZzeYfpump', // the SPL token mint address (base58), e.g. from pump.fun or Raydium
   dexscreener: (mint) => (mint ? `https://dexscreener.com/solana/${mint}` : 'https://dexscreener.com/solana'),
   swap: (mint) => (mint ? `https://jup.ag/swap/SOL-${mint}` : null),
 };
